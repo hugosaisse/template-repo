@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "tickets-db": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@database-mcp/sqlite@0.4.2",
+        "--dsn",
+        "${workspaceFolder}/data/support.db"
+      ]
+    }
+  }
+}
