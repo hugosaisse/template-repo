@@ -1,7 +1,7 @@
 # Endpoint review checklist
 
-1. Does it return a typed response model, not a bare dict?
-2. Is every query parameter validated, with a sensible default?
-3. Does it handle the empty-result case explicitly?
-4. Is the SQL parameterised — no f-strings, no concatenation?
-5. Is there a test covering one normal case and one empty case?
+1. Does every response come back in the same, consistent shape — no fields added or missing?
+2. Does every filter fall back to a sensible default when it's missing or odd?
+3. Does "nothing matches" come back as an honest empty list, not a crash?
+4. Are filter values kept safely separate from the SQL itself, so they can never be run as commands?
+5. Is there an automatic check covering one normal case and one "nothing found" case?

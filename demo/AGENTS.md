@@ -21,7 +21,10 @@ Python 3.12, FastAPI, SQLite. No ORM — plain `sqlite3` through `app/db.py`.
 
 - Endpoint paths are lowercase and hyphenated: `/tickets/by-category`, not `/ticketsByCategory`.
 - Function names are `snake_case` and say what they return: `count_by_category`.
-- Pass values to SQL as parameters. Never build SQL with f-strings or concatenation.
+- Pass values to SQL as parameters. Never build SQL with f-strings or concatenation — a filter value must never be able to change what the query does, only what it matches.
+
+These three rules are exactly what `endpoint-review` checks for — see
+`docs/endpoint-checklist.md` for the plain-language version of the same bar.
 
 ## Always
 
