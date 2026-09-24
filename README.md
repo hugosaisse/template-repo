@@ -45,10 +45,15 @@ them in place is the demo. Each one goes somewhere specific:
 | `demo/endpoint-review/` | `.github/skills/endpoint-review/` | demo 2 |
 | `demo/reviewer.agent.md` | `.github/agents/reviewer.agent.md` | demo 3 |
 | `demo/mcp.json` | `.vscode/mcp.json` | demo 4 |
+| `demo/hooks/` (both files) | `.github/hooks/` | optional — no demo |
 
-Two extras you can try afterwards: `demo/guardrails.json` and
-`demo/block-secrets.sh` go to `.github/hooks/`, and show a rule that is enforced
-rather than requested.
+**The hook is optional and has no live demo.** `demo/hooks/` holds two files
+that only work as a pair: `guardrails.json` says *when* to act (just before
+every tool call — the `PreToolUse` event) and `block-secrets.sh` says *what* to
+do (refuse any call that mentions a `.env` file). Copy the whole folder so both
+arrive together in `.github/hooks/`: the JSON runs
+`bash .github/hooks/block-secrets.sh`, so a JSON without its script has nothing
+to run.
 
 ## When it goes wrong
 
@@ -60,6 +65,10 @@ rather than requested.
   and that the top-level key is `"servers"`. Accept the trust prompt, then
   reload the window before debugging anything else.
 - **Custom agents missing.** You are in Ask mode. Switch the chat to Agent mode.
+- **Every tool call is refused, or warns, after adding the hook.** The script is
+  missing: `.github/hooks/` needs `block-secrets.sh` next to `guardrails.json`.
+  In the Copilot CLI a hook that cannot run refuses the call; VS Code shows a
+  warning and carries on.
 - **Out of AI credits.** Code completions still work. Batch your requests and
   start fresh chats instead of dragging a long history along.
 
